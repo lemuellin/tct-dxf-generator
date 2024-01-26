@@ -1,21 +1,34 @@
+import removeEmptyElements from "./removeEmptyElements";
+import groupG93 from "./groupG93";
+
 const preProcess = (array) => {
+    // Remove '\r' from each element and filter out empty elements
+    let modifiedArray = array.filter(element => element !== '\r').map(element => element.replace('\r', ''));
+    
     let result = [];
-    let isBetweenMarkers = false;
-    let currentBlock = [];
-    for (const line of array) {
-      if (line.includes("M25")) {
-        // Start collecting lines between M25 and M08
-        isBetweenMarkers = true;
-        currentBlock = [];
-      } else if (line.includes("M08")) {
-        // Stop collecting lines when M08 is encountered
-        isBetweenMarkers = false;
-        result.push(currentBlock);
-      } else if (isBetweenMarkers) {
-        // Collect lines between M25 and M08
-        currentBlock.push(line);
+    let currentContent = [];
+    let startPoint = false;
+
+    for (const line of modifiedArray) {
+      if(line.startsWith('G93')){
+        result.push(currentContent);
+        startPoint = false;
+        currentContent = [];
+        result.push([line]);
+      }
+      if (line === 'M25') {
+        result.push(currentContent);
+        startPoint = true;
+        currentContent = [];
+      } else if (line === 'M30'){
+        result.push(currentContent);
+      } else if (startPoint) {
+        currentContent.push(line.trim());
       }
     }
+    result = removeEmptyElements(result);
+    result = groupG93(result);
+
     return result;
 }
 
