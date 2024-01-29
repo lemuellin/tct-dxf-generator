@@ -79,7 +79,7 @@ const DataProcessor = (props) => {
             type: "text/plain;charset=utf-8"
         });
         
-        // FileSaver.saveAs(blob, 'program.js');
+        FileSaver.saveAs(blob, 'program.js');
 
     }
 
