@@ -69,6 +69,7 @@ const DataProcessor = (props) => {
         XYCoordinate = mergeArray(XYCoordinate);
         // 3.5 Adjust the XY with ZC
         XYCoordinate = adjustZC(XYCoordinate, ZC);
+        console.log(XYCoordinate);
         
         // 6. Create Program for QCAD
         const QCAD = toProgram(XYCoordinate, Diameter);
@@ -78,7 +79,7 @@ const DataProcessor = (props) => {
             type: "text/plain;charset=utf-8"
         });
         
-        FileSaver.saveAs(blob, 'program.js');
+        // FileSaver.saveAs(blob, 'program.js');
 
     }
 
