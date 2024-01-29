@@ -6,6 +6,7 @@ import findY from "../helpers/findY";
 import findSR from "../helpers/findSR";
 import updateXY from "../helpers/updateXY";
 import mergeArray from "../helpers/mergeArray";
+import adjustZC from "../helpers/adjustZC";
 import toProgram from "../helpers/toProgram";
 import FileSaver from 'file-saver';
 
@@ -66,6 +67,8 @@ const DataProcessor = (props) => {
             }
         }
         XYCoordinate = mergeArray(XYCoordinate);
+        // 3.5 Adjust the XY with ZC
+        XYCoordinate = adjustZC(XYCoordinate, ZC);
         
         // 6. Create Program for QCAD
         const QCAD = toProgram(XYCoordinate, Diameter);

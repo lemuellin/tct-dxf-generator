@@ -47,7 +47,6 @@ const preProcess = (array) => {
       }
     }
     result = removeEmptyElements(result);
-    console.log(result);
     result = groupG93(result);
 
     return result;
