@@ -9,10 +9,12 @@
     - Read Zero Correction
 
 2. File Input Requirement:
+    - M25
+    - G93X0Y0
     - End the program with M30
     - The program only reads 1 Diameter. The first line of the drill file starts with "T" will be assumed to be the diameter for all holes.
 
-3. Future Development:
+4. Future Development:
     - Read Multiple diameters
     - Read drill files that has no decimal points for XY
     - Read number of digits for all X and Y when reading XY coordinates
